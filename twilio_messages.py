@@ -4,7 +4,7 @@ import uuid
 
 from trytond.config import config
 from trytond.ir.resource import ResourceMixin
-from trytond.model import ModelView, fields
+from trytond.model import fields
 from trytond.pool import Pool
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
@@ -150,6 +150,7 @@ def sendmessage(message, client=None):
 def get_twilio_client(account_sid=ACCOUNT_SID, auth_token=AUTH_TOKEN):
     return Client(account_sid, auth_token)
 
+
 class SendMessage(Wizard):
     'Send Message'
     __name__ = 'twilio.send_message'
@@ -162,21 +163,21 @@ class SendMessage(Wizard):
         ])
     send = StateTransition()
 
-
     def transition_send(self):
         pool = Pool()
         Message = pool.get('twilio.message')
 
         message = Message(
-            from_ = self.start.from_,
-            to = self.start.to,
-            body = self.start.body,
-            resource = self.start.resource
+            from_=self.start.from_,
+            to=self.start.to,
+            body=self.start.body,
+            resource=self.start.resource
             )
         message.save()
         message.send()
 
         return 'end'
+
 
 class SendMessageStart(ResourceMixin):
     'Send Message'

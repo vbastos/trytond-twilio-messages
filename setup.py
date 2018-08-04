@@ -54,7 +54,7 @@ if minor_version % 2:
 setup(name=name,
     version=version,
     description='Tryton module to send message with Twilio',
-    long_description=read('README'),
+    long_description=read('README.rst'),
     author='Lava Lab Software',
     author_email='mail@lavalab.com.au',
     url='http://www.lavalab.com.au/',
